@@ -1,0 +1,19 @@
+body {
+  background:#999;
+  font-family:helvetica;
+}
+
+h1 {
+  color:red
+}
+
+p {
+  background:#555;
+  color: white;
+  padding:15px;
+}
+
+#special {
+  background:red;
+  color:white;
+}
