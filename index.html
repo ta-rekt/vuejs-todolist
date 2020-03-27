@@ -1,0 +1,70 @@
+<!doctype html>
+
+<head>
+    <title> todolist </title>
+</head>
+
+
+<div id="app">
+    <input v-model= "listTitle">
+    <h2> {{listTitle}} </h2>
+
+    <ul>
+        <list-item
+            v-for="item in appList"
+            v-bind:todo="item"
+            v-bind:key="item.id">
+        </list-item>
+
+    </ul>
+
+    <input v-model="newItem">
+
+    <button @click="addItem(newItem)"> Add item </button>
+
+    <h3> number of items: {{ listSize }} </h3>
+</div>
+
+<script src="vue.min.js"></script>
+
+<script>
+  Vue.component('list-item', {
+    props: ['todo'],
+    template: '<li id="firstItem"> {{todo.text}} <button v-on:click="removeItem"> remove </button></li> ',
+
+    methods: {
+      removeItem: function(){
+        var item = document.getElementById("firstItem");
+        item.parentNode.removeChild(item);
+      }
+    }
+
+  })
+
+  var app = new Vue({
+    el: '#app',
+
+    data: {
+      appList: [],
+      listTitle: 'list title goes here',
+      listVisible: false,
+      newItem: ""
+    },
+
+    computed: {
+      listSize () {
+        return this.appList.length
+      }
+    },
+
+    methods: {
+      addItem: function(value) {
+        this.appList.push({id: 1, text: value});
+        this.listEmpty = true
+      },
+      removeItem: function() {
+        this.appList.pop()
+      }
+    }
+  })
+</script>
