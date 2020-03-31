@@ -1,11 +1,15 @@
 <template>
   <div>
-    <h3> title: {{ data.title }} id: {{ data.id }} </h3>
+    <h3> {{ data.title }}</h3>
     <button class="removeList" v-on:click="$emit('remove-list', data)">remove list </button>
-    <input type="text" v-model="newItemText" placeholder="new item" @keyup.enter="addItem"/>
-    <ul>
-      <list-item v-for="item in items" :data="item" v-on:remove-item="removeItem"></list-item>
-    </ul>
+    <button class="hideList" v-on:click="toggleHideList" v-if="showList">hide list </button>
+    <button class="showList" v-on:click="toggleHideList" v-if="!showList">show list </button>
+    <section v-if="showList">
+      <input type="text" v-model="newItemText" placeholder="new item" @keyup.enter="addItem"/>
+      <ul>
+        <list-item v-for="item in items" :data="item" v-on:remove-item="removeItem"></list-item>
+      </ul>
+    </section>
   </div>
 </template>
 
@@ -16,7 +20,8 @@ export default {
   data () {
     return {
       items: [],
-      newItemText: ""
+      newItemText: "",
+      showList: true
     }
   },
   methods: {
@@ -28,6 +33,9 @@ export default {
     },
     removeItem: function(item) {
       this.items.splice(this.items.indexOf(item), 1);
+    },
+    toggleHideList: function() {
+      this.showList = !this.showList;
     }
   }
 }
