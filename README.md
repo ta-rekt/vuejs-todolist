@@ -1,4 +1,4 @@
 # vuejs-todolist
-simple todolist using the Vue.js framework. currently written on a single file with only one component. usage of modular components and Vue-cli coming soon
+Simple todolist manager using the Vue.js framework. A user can create multiple lists, and keep track of completed items in each list.
 
 
